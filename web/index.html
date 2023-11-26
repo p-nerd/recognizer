@@ -3,11 +3,15 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.9, user-scalable=0" />
         <title>Data Creator</title>
     </head>
-    <body>
-        <h1 class="text-3xl font-bold underline">Hello world!</h1>
+    <body class="overscroll-none bg-black font-arial text-white">
+        <div class="flex w-full flex-col items-center justify-center p-1 pt-20">
+            <h1 class="w-full text-center text-h1">Data Creator</h1>
+            <br />
+            <div class="flex w-full flex-col items-center justify-center" id="sketch-pad-container"></div>
+        </div>
         <script type="module" src="/src/main.ts"></script>
     </body>
 </html>
