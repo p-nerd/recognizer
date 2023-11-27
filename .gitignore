@@ -24,4 +24,6 @@ dist-ssr
 *.sw?
 
 # Own
-view/public/data
+web/public/data
+.vite
+
