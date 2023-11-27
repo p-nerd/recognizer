@@ -1,4 +1,5 @@
 import type { TPaths } from "../../lib/draw";
+import type { TSample } from "../../lib/types";
 
 import fs from "node:fs";
 import draw from "../../lib/draw";
@@ -11,13 +12,6 @@ const canvas = createCanvas(400, 400);
 const ctx = canvas.getContext("2d") as unknown as CanvasRenderingContext2D;
 
 const file_names = fs.readdirSync(dir.ROW);
-
-type TSample = {
-    id: number;
-    label: string;
-    student_name: string;
-    student_id: number;
-};
 
 const samples: TSample[] = [];
 
