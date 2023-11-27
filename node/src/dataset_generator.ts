@@ -1,19 +1,14 @@
+import type { TPaths } from "../../lib/draw";
+
 import fs from "node:fs";
-import path from "node:path";
-import draw, { TPaths } from "../../lib/draw";
+import draw from "../../lib/draw";
+
 import { createCanvas } from "canvas";
+import { dir } from "../../lib/def";
+import { print_progress } from "./utils";
 
 const canvas = createCanvas(400, 400);
 const ctx = canvas.getContext("2d") as unknown as CanvasRenderingContext2D;
-
-const dir: Record<string, string> = {};
-
-dir.DATA = path.join(__dirname, "/../../data");
-dir.ROW = `${dir.DATA}/raw`;
-dir.DATASET = `${dir.DATA}/dataset`;
-dir.JSON = `${dir.DATASET}/json`;
-dir.IMG = `${dir.DATASET}/img`;
-dir.SAMPLES = `${dir.DATASET}/samples.json`;
 
 const file_names = fs.readdirSync(dir.ROW);
 
@@ -61,7 +56,7 @@ file_names.forEach((fn) => {
 
         generateImageFile(`${dir.IMG}/${id}.png`, paths);
 
-        console.log(`${id} json and png generated`);
+        print_progress(id, file_names.length * 8);
 
         id++;
     }
