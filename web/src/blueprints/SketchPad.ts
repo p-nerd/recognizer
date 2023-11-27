@@ -9,77 +9,81 @@ const cal_mouse = (canvas: TCanvas, e: MouseEvent): TMouse => {
 };
 
 class SketchPad {
-    private canvas: TCanvas;
-    private undo_btn: TButton;
-    private ctx: TCtx;
-    private paths: TPath[] = [];
-    private is_drawing: boolean = false;
+    private _canvas: TCanvas;
+    private _undo_btn: TButton;
+    private _ctx: TCtx;
+    private _paths: TPath[] = [];
+    private _is_drawing: boolean = false;
 
-    constructor(container_selector: string, size = 400) {
-        this.canvas = document.createElement("canvas");
-        this.canvas.width = size;
-        this.canvas.height = size;
-        this.canvas.className = "bg-zinc-900 shadow-lg rounded";
+    public paths = () => this._paths;
 
-        this.undo_btn = document.createElement("button");
-        this.undo_btn.innerText = "UNDO";
-        this.undo_btn.className = "py-2 bg-zinc-900 m-1 px-5 rounded disabled:bg-zinc-900/50 disabled:text-white/50";
+    public constructor(container_selector: string, size = 400) {
+        this._canvas = document.createElement("canvas");
+        this._canvas.width = size;
+        this._canvas.height = size;
+        this._canvas.className = "bg-zinc-900 shadow-lg rounded";
+
+        this._undo_btn = document.createElement("button");
+        this._undo_btn.innerText = "UNDO";
+        this._undo_btn.className = "rounded disabled:bg-zinc-900/50 disabled:text-white/50 py-2 bg-zinc-900 m-1 px-5";
 
         const container = document.querySelector(container_selector);
-        container?.appendChild(this.canvas);
-        container?.appendChild(this.undo_btn);
+        container?.appendChild(this._canvas);
+        container?.appendChild(this._undo_btn);
 
-        this.ctx = this.canvas.getContext("2d") as TCtx;
+        this._ctx = this._canvas.getContext("2d") as TCtx;
 
-        this.paths = [];
-        this.is_drawing = false;
-
+        this.reset();
         this.add_event_listeners();
-
-        this.redraw();
     }
 
+    public reset = () => {
+        this._paths = [];
+        this._is_drawing = false;
+        this.redraw();
+    };
+
     private add_event_listeners = () => {
-        this.canvas.onmousedown = e => {
-            this.paths.push([cal_mouse(this.canvas, e)]);
-            this.is_drawing = true;
+        this._canvas.onmousedown = e => {
+            this._paths.push([cal_mouse(this._canvas, e)]);
+            this._is_drawing = true;
         };
-        this.canvas.onmousemove = e => {
-            if (this.is_drawing) {
-                const last_path = this.paths[this.paths.length - 1];
-                last_path.push(cal_mouse(this.canvas, e));
+        this._canvas.onmousemove = e => {
+            if (this._is_drawing) {
+                const last_path = this._paths[this._paths.length - 1];
+                last_path.push(cal_mouse(this._canvas, e));
                 this.redraw();
             }
         };
-        this.canvas.onmouseup = () => {
-            this.is_drawing = false;
+        document.onmouseup = () => {
+            this._is_drawing = false;
         };
-        this.canvas.ontouchstart = e => {
+        this._canvas.ontouchstart = e => {
             const loc = e.touches[0];
             // @ts-ignore
-            this.canvas.onmousedown(loc);
+            this._canvas.onmousedown(loc);
         };
-        this.canvas.ontouchmove = e => {
+        this._canvas.ontouchmove = e => {
             const loc = e.touches[0];
             // @ts-ignore
-            this.canvas.onmousemove(loc);
+            this._canvas.onmousemove(loc);
         };
-        this.canvas.ontouchend = e => {
+        document.ontouchend = e => {
             const loc = e.touches[0];
             // @ts-ignore
-            this.canvas.onmouseup(loc);
+            document.onmouseup(loc);
         };
 
-        this.undo_btn.onclick = () => {
-            this.paths.pop();
+        this._undo_btn.onclick = () => {
+            this._paths.pop();
             this.redraw();
         };
     };
 
     private redraw = () => {
-        this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        draw.paths(this.ctx, this.paths);
-        this.undo_btn.disabled = this.paths.length <= 0;
+        this._ctx?.clearRect(0, 0, this._canvas.width, this._canvas.height);
+        draw.paths(this._ctx, this._paths);
+        this._undo_btn.disabled = this._paths.length <= 0;
     };
 }
 
