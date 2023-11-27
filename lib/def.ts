@@ -4,6 +4,6 @@ const DATASET = `${DATA}/dataset`;
 const JSON = `${DATASET}/json`;
 const IMG = `${DATASET}/img`;
 const SAMPLES = `${DATASET}/samples.json`;
-const SAMPLES_JS = `${DATASET}/samples.js`;
+const SAMPLES_TS = `${DATASET}/samples.ts`;
 
-export const dir = { DATA, ROW, DATASET, JSON, IMG, SAMPLES, SAMPLES_JS };
+export const dir = { DATA, ROW, DATASET, JSON, IMG, SAMPLES, SAMPLES_TS };

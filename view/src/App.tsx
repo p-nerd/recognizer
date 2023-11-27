@@ -1,3 +1,7 @@
+import samples from "../../data/dataset/samples.ts";
+
+console.log(samples);
+
 function App() {
     return (
         <>
