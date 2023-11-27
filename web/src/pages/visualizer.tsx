@@ -4,12 +4,13 @@ import { For } from "solid-js";
 
 import samples from "../../../data/dataset/samples.ts";
 
-const SampleRow = (p: { name: string; samples: TSample[] }) => {
+const SampleRow = (p: { index: number; name: string; samples: TSample[] }) => {
     return (
         <div class="flex w-full items-center gap-2 rounded bg-zinc-900 p-5">
-            <div class="w-[14%] truncate">
-                {p.name}
-                <br />({p.samples[0].student_id})
+            <div class="w-[14%] truncate text-center">
+                <div>{p.index + 1}</div>
+                <div>{p.name}</div>
+                <div>({p.samples[0].student_id})</div>
             </div>
             <div class="flex w-full flex-wrap items-center gap-2">
                 <For each={p.samples}>
@@ -33,7 +34,7 @@ export default () => {
     return (
         <div class="mx-auto flex w-[90%] flex-col items-center gap-2 py-20 text-white">
             <For each={sliced_groups}>
-                {key => <SampleRow name={groups[key][0].student_name} samples={groups[key]} />}
+                {(key, i) => <SampleRow index={i()} name={groups[key][0].student_name} samples={groups[key]} />}
             </For>
         </div>
     );
