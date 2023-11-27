@@ -1,8 +1,9 @@
-export const dir: Record<string, string> = {};
+const DATA = "../data";
+const ROW = `${DATA}/raw`;
+const DATASET = `${DATA}/dataset`;
+const JSON = `${DATASET}/json`;
+const IMG = `${DATASET}/img`;
+const SAMPLES = `${DATASET}/samples.json`;
+const SAMPLES_JS = `${DATASET}/samples.js`;
 
-dir.DATA = "../data";
-dir.ROW = `${dir.DATA}/raw`;
-dir.DATASET = `${dir.DATA}/dataset`;
-dir.JSON = `${dir.DATASET}/json`;
-dir.IMG = `${dir.DATASET}/img`;
-dir.SAMPLES = `${dir.DATASET}/samples.json`;
+export const dir = { DATA, ROW, DATASET, JSON, IMG, SAMPLES, SAMPLES_JS };

@@ -63,3 +63,4 @@ file_names.forEach((fn) => {
 });
 
 fs.writeFileSync(dir.SAMPLES, JSON.stringify(samples));
+fs.writeFileSync(dir.SAMPLES_JS, `const samples = ${JSON.stringify(samples)};\n\nexport default samples;`);
