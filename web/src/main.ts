@@ -24,7 +24,7 @@ const labels = ["car", "fish", "house", "tree", "bicycle", "guitar", "pencil", "
 
 const start = () => {
     if (student_input.value === "") {
-        alert("Please type name first");
+        alert("Please type your name first");
         return;
     }
     data.student = student_input.value;

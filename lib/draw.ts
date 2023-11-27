@@ -1,10 +1,9 @@
-import type { TCtx } from "@/helpers/types";
-
 export type TMouse = [number, number];
 export type TPath = TMouse[];
+export type TPaths = TPath[];
 
 const draw = {
-    path: (ctx: TCtx, path: TPath, color = "white") => {
+    path: (ctx: CanvasRenderingContext2D, path: TPath, color = "white") => {
         ctx.strokeStyle = color;
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -17,7 +16,7 @@ const draw = {
         ctx.stroke();
     },
 
-    paths: (ctx: TCtx, paths: TPath[], color = "white") => {
+    paths: (ctx: CanvasRenderingContext2D, paths: TPaths, color = "white") => {
         for (const path of paths) {
             draw.path(ctx, path, color);
         }

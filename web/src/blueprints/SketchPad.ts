@@ -1,7 +1,7 @@
 import type { TCanvas, TCtx, TButton } from "@/helpers/types";
-import type { TMouse, TPath } from "@/helpers/draw";
+import type { TMouse, TPath } from "../../../lib/draw";
 
-import draw from "@/helpers/draw";
+import draw from "../../../lib/draw";
 
 const cal_mouse = (canvas: TCanvas, e: MouseEvent): TMouse => {
     const rect = canvas.getBoundingClientRect();
