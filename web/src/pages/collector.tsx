@@ -1,5 +1,4 @@
-import "./style.css";
-import type { TPath } from "./helpers/draw";
+import type { TPath } from "../../../lib/draw";
 import SketchPad from "@/blueprints/SketchPad";
 
 const advance_button = document.querySelector("#advance-btn") as HTMLButtonElement;
@@ -79,3 +78,28 @@ const save = () => {
 };
 
 advance_button.onclick = start;
+
+export default () => {
+    return (
+        <div class="flex w-full flex-col items-center justify-center gap-2 p-1 pt-20">
+            <h1 class="text-h1 w-full text-center">Data Creator</h1>
+            <div>
+                <input
+                    id="student"
+                    type="text"
+                    placeholder="type your name"
+                    class="rounded bg-zinc-900 px-3 py-2 focus:outline-none"
+                />
+                <span id="instructors" class="rounded bg-zinc-800 px-3 py-2" style="display: none"></span>
+                <button id="advance-btn" class="rounded bg-zinc-900 px-5 py-2">
+                    START
+                </button>
+            </div>
+            <div
+                class="flex w-full flex-col items-center justify-center"
+                id="sketch-pad-container"
+                style="visibility: hidden"
+            ></div>
+        </div>
+    );
+};

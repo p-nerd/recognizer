@@ -1,17 +1,16 @@
-import type { TCanvas, TCtx, TButton } from "@/helpers/types";
 import type { TMouse, TPath } from "../../../lib/draw";
 
 import draw from "../../../lib/draw";
 
-const cal_mouse = (canvas: TCanvas, e: MouseEvent): TMouse => {
+const cal_mouse = (canvas: HTMLCanvasElement, e: MouseEvent): TMouse => {
     const rect = canvas.getBoundingClientRect();
     return [Math.round(e.clientX - rect.left), Math.round(e.clientY - rect.top)];
 };
 
 class SketchPad {
-    private _canvas: TCanvas;
-    private _undo_btn: TButton;
-    private _ctx: TCtx;
+    private _canvas: HTMLCanvasElement;
+    private _undo_btn: HTMLButtonElement;
+    private _ctx: CanvasRenderingContext2D;
     private _paths: TPath[] = [];
     private _is_drawing: boolean = false;
 
@@ -31,7 +30,7 @@ class SketchPad {
         container?.appendChild(this._canvas);
         container?.appendChild(this._undo_btn);
 
-        this._ctx = this._canvas.getContext("2d") as TCtx;
+        this._ctx = this._canvas.getContext("2d") as CanvasRenderingContext2D;
 
         this.reset();
         this.add_event_listeners();
